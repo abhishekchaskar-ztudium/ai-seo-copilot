@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI SEO Copilot</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">A</div>
+        <div>
+          <div class="brand-name">AI SEO Copilot</div>
+          <div class="brand-subtitle">Ahrefs dashboard</div>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Workflow stages">
+        <button class="nav-item active" data-stage="upload">
+          <span class="nav-icon">1</span>
+          Upload
+        </button>
+        <button class="nav-item" data-stage="gemini">
+          <span class="nav-icon">2</span>
+          Gemini API
+        </button>
+        <button class="nav-item" data-stage="dashboard">
+          <span class="nav-icon">3</span>
+          Analyze Dashboard
+        </button>
+        <button class="nav-item" data-stage="report">
+          <span class="nav-icon">4</span>
+          Action Report
+        </button>
+      </nav>
+
+      <div class="quick-card">
+        <div class="quick-title">Quick Insights</div>
+        <div class="quick-row"><span>Tasks</span><strong id="quickTasks">0</strong></div>
+        <div class="quick-row"><span>Issues</span><strong id="quickIssues">0</strong></div>
+        <div class="quick-row"><span>Priority</span><strong id="quickPriority">0</strong></div>
+      </div>
+
+      <button class="ghost-button" id="downloadReportSide">Export Report</button>
+    </aside>
+
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="stepper" aria-label="Progress">
+          <div class="step active" data-step-dot="upload">Upload</div>
+          <div class="step" data-step-dot="gemini">Gemini</div>
+          <div class="step" data-step-dot="dashboard">Analyze</div>
+          <div class="step" data-step-dot="report">Report</div>
+        </div>
+        <div class="admin">
+          <div class="online"><span></span><strong id="onlineCount">0</strong> tasks ready</div>
+          <button class="circle-button" id="resetButton" title="Reset workspace">R</button>
+          <div class="avatar">A</div>
+          <div>
+            <strong>Admin</strong>
+            <small>Administrator</small>
+          </div>
+        </div>
+      </header>
+
+      <section class="stage active" id="stage-upload">
+        <div class="hero-block upload-hero">
+          <div>
+            <p class="eyebrow">Stage 1</p>
+            <h1>Upload Ahrefs CSV files</h1>
+            <p>Drop each export into its matching slot. Organic competitors files are supported as competitor/domain exports or keyword-gap exports.</p>
+          </div>
+          <div class="upload-note">
+            <strong>Supported</strong>
+            <span>CSV, TSV, UTF-8, UTF-16, comma, tab, semicolon</span>
+          </div>
+        </div>
+
+        <div class="upload-grid">
+          <article class="upload-card" data-type="organic_keywords">
+            <div class="upload-card-head">
+              <div class="upload-icon">KW</div>
+              <div>
+                <h2>Organic Keywords</h2>
+                <p>Keyword, URL, position, impressions, CTR, traffic.</p>
+              </div>
+            </div>
+            <label class="file-drop">
+              <input type="file" accept=".csv" multiple />
+              <span>Choose or drop CSV files</span>
+              <small>Required for ranking and CTR checks</small>
+            </label>
+            <button class="primary-button upload-button">Upload selected</button>
+            <div class="upload-status">No files uploaded</div>
+          </article>
+
+          <article class="upload-card" data-type="top_pages">
+            <div class="upload-card-head">
+              <div class="upload-icon">PG</div>
+              <div>
+                <h2>Top Pages</h2>
+                <p>Page URLs, current traffic, previous traffic.</p>
+              </div>
+            </div>
+            <label class="file-drop">
+              <input type="file" accept=".csv" multiple />
+              <span>Choose or drop CSV files</span>
+              <small>Optional traffic-drop coverage</small>
+            </label>
+            <button class="primary-button upload-button">Upload selected</button>
+            <div class="upload-status">No files uploaded</div>
+          </article>
+
+          <article class="upload-card" data-type="backlinks">
+            <div class="upload-card-head">
+              <div class="upload-icon">BL</div>
+              <div>
+                <h2>Backlinks</h2>
+                <p>Referring pages and link context for future expansion.</p>
+              </div>
+            </div>
+            <label class="file-drop">
+              <input type="file" accept=".csv" multiple />
+              <span>Choose or drop CSV files</span>
+              <small>Accepted for workspace context</small>
+            </label>
+            <button class="primary-button upload-button">Upload selected</button>
+            <div class="upload-status">No files uploaded</div>
+          </article>
+
+          <article class="upload-card" data-type="broken_backlinks">
+            <div class="upload-card-head">
+              <div class="upload-icon">404</div>
+              <div>
+                <h2>Broken Backlinks</h2>
+                <p>Broken, 404, not found, lost backlinks.</p>
+              </div>
+            </div>
+            <label class="file-drop">
+              <input type="file" accept=".csv" multiple />
+              <span>Choose or drop CSV files</span>
+              <small>Creates reclamation tasks</small>
+            </label>
+            <button class="primary-button upload-button">Upload selected</button>
+            <div class="upload-status">No files uploaded</div>
+          </article>
+
+          <article class="upload-card" data-type="competitors">
+            <div class="upload-card-head">
+              <div class="upload-icon">OC</div>
+              <div>
+                <h2>Organic Competitors</h2>
+                <p>Competitor domains, common keywords, unique keywords, traffic, or keyword gaps.</p>
+              </div>
+            </div>
+            <label class="file-drop">
+              <input type="file" accept=".csv" multiple />
+              <span>Choose or drop CSV files</span>
+              <small>Domain export or content-gap export</small>
+            </label>
+            <button class="primary-button upload-button">Upload selected</button>
+            <div class="upload-status">No files uploaded</div>
+          </article>
+        </div>
+
+        <div class="stage-actions">
+          <button class="secondary-button" data-go="gemini">Continue to Gemini API</button>
+        </div>
+      </section>
+
+      <section class="stage" id="stage-gemini">
+        <div class="hero-block">
+          <p class="eyebrow">Stage 2</p>
+          <h1>Gemini API Setup</h1>
+          <p>Paste your key like an automation node. It is used only for the analysis request and is never saved.</p>
+        </div>
+
+        <div class="settings-panel">
+          <label>
+            Backend API URL
+            <input id="apiBaseUrl" type="url" placeholder="https://your-render-service.onrender.com" />
+          </label>
+          <label>
+            Gemini API key
+            <input id="apiKey" type="password" placeholder="Paste your rotated Gemini API key" />
+          </label>
+          <label>
+            Model
+            <select id="modelSelect">
+              <option value="gemini-2.5-flash">Gemini 2.5 Flash - Recommended</option>
+              <option value="gemini-2.5-pro">Gemini 2.5 Pro - Best quality</option>
+              <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash-Lite - Fastest / cheapest</option>
+              <option value="gemini-2.0-flash">Gemini 2.0 Flash - Fallback</option>
+              <option value="custom">Custom model code</option>
+            </select>
+          </label>
+          <label id="customModelWrap" class="hidden">
+            Custom model
+            <input id="customModel" type="text" placeholder="example: gemini-2.5-flash-preview-09-2025" />
+          </label>
+          <div class="privacy-note">
+            Decisions come from rules. Gemini only explains issues, suggests actions, and generates content from evidence.
+          </div>
+        </div>
+
+        <div class="stage-actions">
+          <button class="secondary-button" data-go="upload">Back</button>
+          <button class="primary-button" id="runAnalyze">Analyze Workspace</button>
+        </div>
+      </section>
+
+      <section class="stage" id="stage-dashboard">
+        <div class="hero-block row">
+          <div>
+            <p class="eyebrow">Stage 3</p>
+            <h1>Analyze Dashboard</h1>
+            <p>Rule-engine truth, AI-enhanced task context, and priority-led execution.</p>
+          </div>
+          <button class="primary-button" id="runAnalyzeTop">Re-run analysis</button>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi-card"><span>Total Tasks</span><strong id="taskCount">0</strong><small>Detected opportunities</small></div>
+          <div class="kpi-card"><span>Issue Types</span><strong id="issueTypeCount">0</strong><small>Problem categories</small></div>
+          <div class="kpi-card"><span>High Priority</span><strong id="highPriorityCount">0</strong><small>Priority 80+</small></div>
+          <div class="kpi-card"><span>Avg Confidence</span><strong id="avgConfidence">0</strong><small>Evidence strength</small></div>
+        </div>
+
+        <div class="dashboard-grid">
+          <section class="panel">
+            <div class="panel-heading">Issue Distribution</div>
+            <div id="issueChart" class="bar-chart"></div>
+          </section>
+          <section class="panel">
+            <div class="panel-heading">Top Priority Work</div>
+            <div id="topTasks" class="task-list"></div>
+          </section>
+        </div>
+
+        <section class="panel">
+          <div class="panel-heading with-filter">
+            Task Explorer
+            <select id="issueFilter"><option value="">All issue types</option></select>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Issue</th>
+                  <th>Page</th>
+                  <th>Keyword</th>
+                  <th>Priority</th>
+                  <th>Evidence</th>
+                </tr>
+              </thead>
+              <tbody id="taskTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <section class="stage" id="stage-report">
+        <div class="hero-block row">
+          <div>
+            <p class="eyebrow">Stage 4</p>
+            <h1>Action Report</h1>
+            <p>A single working document with problems, evidence, tasks, actions, and generated SEO content.</p>
+          </div>
+          <div class="report-actions">
+            <button class="secondary-button" id="downloadJson">Export JSON</button>
+            <button class="secondary-button" id="downloadCsv">Export CSV</button>
+            <button class="primary-button" id="downloadReport">Download PDF Report</button>
+          </div>
+        </div>
+
+        <section class="report-shell">
+          <pre id="reportPreview">Run analysis to generate the full SEO action report.</pre>
+        </section>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="loading-overlay hidden" id="loadingOverlay" role="status" aria-live="polite">
+      <div class="loading-panel">
+        <div class="loading-kicker">Analyzing workspace</div>
+        <div class="loading-title" id="loadingTitle">Finding SEO opportunities</div>
+        <div class="loading-copy" id="loadingCopy">Running rule checks and enriching the highest-priority issues with Gemini.</div>
+        <div class="loading-bar" aria-hidden="true"><span></span></div>
+        <div class="loading-steps">
+          <span>Parse</span>
+          <span>Prioritize</span>
+          <span>Gemini</span>
+          <span>Report</span>
+        </div>
+      </div>
+    </div>
+    <script src="/static/config.js"></script>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

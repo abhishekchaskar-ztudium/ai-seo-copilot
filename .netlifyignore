@@ -1,0 +1,9 @@
+.venv/
+.netlify/
+node_modules/
+backend/.cache/
+**/__pycache__/
+**/*.pyc
+*.log
+backend-*.log
+streamlit*.log

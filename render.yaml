@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: ai-seo-copilot-backend
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: ALLOWED_ORIGINS
+        value: https://ai-seo-copilot.netlify.app,http://localhost:8000,http://127.0.0.1:8000
+      - key: GEMINI_ENRICHMENT_LIMIT
+        value: "25"

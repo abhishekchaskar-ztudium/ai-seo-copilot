@@ -1,0 +1,7 @@
+.netlify/
+netlify-deploy/
+node_modules/
+backend/.cache/
+*.log
+__pycache__/
+*.pyc
