@@ -37,11 +37,30 @@ backend/
     scoring.py
     storage.py
     validation.py
+docs/
+  README.md
+  PROJECT_DOCUMENTATION.md
+  BOSS_PROJECT_BRIEF.md
+  sample_prompts.md
 frontend/
-  app.py
+  index.html
+  static/
+    app.js
+    config.js
+    styles.css
+netlify/
+  functions/
+    api.mts
+netlify.toml
+render.yaml
 requirements.txt
-sample_prompts.md
 ```
+
+## Documentation
+
+- Full project documentation: `docs/PROJECT_DOCUMENTATION.md`
+- Project brief: `docs/BOSS_PROJECT_BRIEF.md`
+- Gemini prompt reference: `docs/sample_prompts.md`
 
 ## Rule Engine
 
@@ -84,7 +103,7 @@ The model defaults to `gemini-2.5-flash`, the recommended general-purpose Gemini
 
 For preview models, use the exact model code shown in Google AI Studio, for example `gemini-2.5-flash-preview-09-2025`.
 
-You can also paste the Gemini API key directly in the Streamlit sidebar before clicking Analyze. That key is sent only to the local FastAPI `/analyze` request and is not written to disk, cached, exported, or committed.
+You can also paste the Gemini API key directly in the web UI before clicking Analyze. That key is sent only to the FastAPI `/analyze` request and is not written to disk, cached, exported, or committed.
 
 Run the backend:
 

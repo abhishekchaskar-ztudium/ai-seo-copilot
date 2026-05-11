@@ -118,7 +118,7 @@ Key benefits:
 
 The project is intentionally simple and maintainable.
 
-- Frontend: staged web UI served by FastAPI, plus a Streamlit interface
+- Frontend: staged static web UI served locally by FastAPI and hosted on Netlify
 - Backend: FastAPI
 - Data processing: pandas
 - Validation and schemas: Pydantic
